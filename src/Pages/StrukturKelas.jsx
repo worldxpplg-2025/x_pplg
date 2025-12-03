@@ -8,158 +8,121 @@ const StrukturKelas = () => {
 
     useEffect(() => {
         if (!aosLoaded) {
-            AOS.init({
-                duration: 800,
-                easing: "ease-out-cubic",
-                once: true,
-            })
+            AOS.init({ duration: 700, easing: "ease-out-cubic" })
+            AOS.refresh()
             setAosLoaded(true)
         }
     }, [aosLoaded])
 
-    // ANIMASI HOVER GLOW (1 tempat)
-    const glow = "transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
-
     return (
-        <div className="z-1 relative h-auto lg:overflow-hidden">
+        <div className="relative h-auto lg:overflow-hidden">
 
             {/* Wali Kelas */}
-            <div
-                data-aos="fade-up"
-                className={`mt-14 md:mt-10 ${glow}`}
-            >
-                <BorderStruktur Jabatan="Wali Kelas" Nama="Neng Hendriawati, S.Pd., M.Pd." Width="200px" />
+            <div data-aos="fade-up">
+                <div className="card-appear glow">
+                    <BorderStruktur Jabatan="Wali Kelas" Nama="Neng Hendriawati, S.Pd., M.Pd." Width="200px" />
+                </div>
             </div>
 
             <div className="flex flex-col justify-center items-center">
 
-                {/* Line vertical */}
-                <img
-                    src="LineVertikal.svg"
-                    alt=""
-                    data-aos="zoom-in"
-                    data-aos-delay="150"
-                    className="transition-all"
+                {/* Vertical Line */}
+                <img src="LineVertikal.svg" alt=""
+                    className="line-draw"
+                    data-aos="fade-up"
                 />
 
-                {/* Garis cabang */}
-                <div className="lg:flex">
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-1rem]" />
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-1rem] hidden lg:flex" />
+                {/* Cabang 1 */}
+                <div className="lg:flex gap-2 mt-2">
+                    <img src="LineHorizontal.svg" className="line-draw" />
+                    <img src="LineHorizontal.svg" className="line-draw hidden lg:flex" />
                 </div>
 
-                {/* Bulatan */}
-                <div
-                    data-aos="fade"
-                    data-aos-delay="200"
-                    className="flex gap-[10rem] lg:gap-[25rem] relative top-[-1.7rem]"
-                >
-                    <img src="Circle.svg" alt="" />
-                    <img src="Circle.svg" alt="" />
+                {/* Circles */}
+                <div className="flex gap-[10rem] lg:gap-[25rem] mt-2">
+                    <img src="Circle.svg" className="pop" />
+                    <img src="Circle.svg" className="pop" />
                 </div>
 
                 {/* Ketua & Wakil */}
-                <div
-                    data-aos="fade-up"
-                    data-aos-delay="250"
-                    className="flex relative top-[-2.5rem]"
-                >
-                    <div className={`relative left-[0.3rem] ${glow}`}>
+                <div className="flex gap-6 mt-3 card-appear">
+                    <div className="glow">
                         <BorderStruktur Jabatan="Ketua Kelas" Nama="Aidil" Width="140px" />
                     </div>
 
-                    <img src="LineHorizontalPendek.svg" className="relative top-3" />
+                    <img src="LineHorizontalPendek.svg" className="line-draw" />
 
-                    <div className={`relative right-[0.3rem] ${glow}`}>
+                    <div className="glow">
                         <BorderStruktur Jabatan="Wakil Ketua" Nama="Rizky" Width="140px" />
                     </div>
                 </div>
 
-                <img src="LineVertikal2.svg" alt="" className="relative top-[-3rem]" />
+                {/* Vertical */}
+                <img src="LineVertikal2.svg" className="line-draw mt-5" />
 
-                {/* Sekretaris - Bendahara */}
-                <div className="lg:flex">
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-4rem]" />
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-4rem] hidden lg:flex" />
+                {/* Sekretaris & Bendahara */}
+                <div className="lg:flex mt-5">
+                    <img src="LineHorizontal.svg" className="line-draw" />
+                    <img src="LineHorizontal.svg" className="line-draw hidden lg:flex" />
                 </div>
 
-                <div
-                    className="flex gap-[10rem] lg:gap-[25rem] relative top-[-4.6rem]"
-                    data-aos="zoom-in"
-                    data-aos-delay="150"
-                >
-                    <img src="Circle.svg" alt="" />
-                    <img src="Circle.svg" alt="" />
+                <div className="flex gap-[10rem] lg:gap-[25rem] mt-2">
+                    <img src="Circle.svg" className="pop" />
+                    <img src="Circle.svg" className="pop" />
                 </div>
 
-                <div
-                    className="flex gap-[5rem] lg:gap-[20rem] relative top-[-5.3rem]"
-                    data-aos="fade-up"
-                    data-aos-delay="300"
-                >
-                    {/* Sekretaris */}
-                    <div className="flex-col">
-                        <div className={glow}>
+                {/* Sekretaris & Bendahara Cards */}
+                <div className="flex gap-[5rem] lg:gap-[20rem] mt-3 card-appear">
+                    <div>
+                        <div className="glow">
                             <BorderStruktur Jabatan="Sekretaris" Nama="Sindi" Width="140px" />
                         </div>
-                        <div className="py-[3%]"></div>
-                        <div className={glow}>
+                        <div className="mt-3 glow">
                             <BorderStruktur Jabatan="" Nama="Raisa" Width="140px" />
                         </div>
                     </div>
 
-                    {/* Bendahara */}
-                    <div className="flex-col">
-                        <div className={glow}>
+                    <div>
+                        <div className="glow">
                             <BorderStruktur Jabatan="Bendahara" Nama="Nazla" Width="140px" />
                         </div>
-                        <div className="py-[3%]"></div>
-                        <div className={glow}>
+                        <div className="mt-3 glow">
                             <BorderStruktur Jabatan="" Nama="Muthia" Width="140px" />
                         </div>
                     </div>
                 </div>
 
-                <img src="LineVertikal3.svg" alt="" className="relative top-[-12rem]" />
+                {/* Vertical */}
+                <img src="LineVertikal3.svg" className="line-draw mt-10" />
 
-                {/* Security + Kebersihan */}
-                <div className="lg:flex">
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-13rem]" />
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-13rem] hidden lg:flex" />
-                    <img src="LineHorizontal.svg" alt="" className="relative top-[-13rem] hidden lg:flex" />
+                {/* Keamanan – Kebersihan */}
+                <div className="lg:flex mt-4">
+                    <img src="LineHorizontal.svg" className="line-draw" />
+                    <img src="LineHorizontal.svg" className="line-draw hidden lg:flex" />
+                    <img src="LineHorizontal.svg" className="line-draw hidden lg:flex" />
                 </div>
 
-                <div
-                    className="flex gap-[8rem] lg:gap-[20rem] relative top-[-13.7rem]"
-                    data-aos="zoom-in"
-                    data-aos-delay="200"
-                >
-                    <img src="Circle.svg" alt="" />
-                    <img src="Circle.svg" alt="" />
-                    <img src="Circle.svg" alt="" className="hidden lg:flex" />
+                <div className="flex gap-[8rem] lg:gap-[20rem] mt-2">
+                    <img src="Circle.svg" className="pop" />
+                    <img src="Circle.svg" className="pop" />
+                    <img src="Circle.svg" className="pop hidden lg:flex" />
                 </div>
 
-                <div
-                    className="flex gap-[5rem] lg:gap-[17rem] relative top-[-14.5rem]"
-                    data-aos="fade-up"
-                    data-aos-delay="350"
-                >
-                    {/* Keamanan */}
-                    <div className="flex-col">
-                        <div className={glow}>
+                <div className="flex gap-[5rem] lg:gap-[17rem] mt-3 card-appear">
+                    <div>
+                        <div className="glow">
                             <BorderStruktur Jabatan="Keamanan" Nama="Siddik" Width="140px" />
                         </div>
-                        <div className="py-[3%]"></div>
-                        <div className={glow}>
+                        <div className="mt-3 glow">
                             <BorderStruktur Jabatan="" Nama="Nadzar" Width="140px" />
                         </div>
                     </div>
 
-                    {/* Kebersihan */}
-                    <div className={`flex-col ${glow}`}>
+                    <div className="glow">
                         <BorderStruktur Jabatan="Kebersihan" Nama="Tulus" Width="140px" />
                     </div>
                 </div>
+
             </div>
         </div>
     )
