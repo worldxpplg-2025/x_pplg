@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
-import SwipeableViews from "react-swipeable-views"
 import { useTheme } from "@mui/material/styles"
 import AppBar from "@mui/material/AppBar"
 import Tabs from "@mui/material/Tabs"
@@ -12,9 +11,11 @@ import Schedule from "./Schedule"
 import AOS from "aos"
 import "aos/dist/aos.css"
 
-// Fungsi TabPanel adalah komponen React yang digunakan untuk menampilkan konten tab.
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+
+// Panel Tab
 function TabPanel(props) {
-	// useEffect digunakan untuk inisialisasi AOS ketika komponen pertama kali dimuat.
 	useEffect(() => {
 		AOS.init()
 		AOS.refresh()
@@ -44,7 +45,6 @@ TabPanel.propTypes = {
 	value: PropTypes.number.isRequired,
 }
 
-// Fungsi a11yProps digunakan untuk memberikan atribut aksesibilitas ke tab.
 function a11yProps(index) {
 	return {
 		id: `full-width-tab-${index}`,
@@ -52,33 +52,26 @@ function a11yProps(index) {
 	}
 }
 
-// Komponen utama yang akan digunakan untuk menampilkan tab.
 export default function FullWidthTabs() {
 	const theme = useTheme()
 	const [value, setValue] = React.useState(0)
 
-	// handleChange digunakan untuk mengubah nilai tab yang aktif.
 	const handleChange = (event, newValue) => {
 		setValue(newValue)
 	}
 
-	// handleChangeIndex digunakan untuk mengubah indeks tab yang aktif.
-	const handleChangeIndex = (index) => {
-		setValue(index)
-	}
-
 	return (
-		<div className="md:px-[10%]  md:mt-5 mt-8" id="Tabs" data-aos="fade-up" data-aos-duration="800" >
-			<div
-				className="font-medium text-[1.6rem] md:text-[1.8rem] relative md:top-[2.8rem] top-[2.7rem] text-center text-white"
-				id="Glow">
+		<div className="md:px-[10%] md:mt-5 mt-8" id="Tabs" data-aos="fade-up" data-aos-duration="800">
+			<div className="font-medium text-[1.6rem] md:text-[1.8rem] relative md:top-[2.8rem] top-[2.7rem] text-center text-white" id="Glow">
 				&
 			</div>
+
 			<Box sx={{ width: "100%" }}>
 				<AppBar
 					position="static"
 					sx={{ bgcolor: "transparent", boxShadow: "none" }}
-					className="px-[10%]">
+					className="px-[10%]"
+				>
 					<Tabs
 						value={value}
 						onChange={handleChange}
@@ -89,14 +82,14 @@ export default function FullWidthTabs() {
 						sx={{
 							display: "flex",
 							justifyContent: "center",
-							width: "auto",
 							margin: "0 auto",
 							"& .MuiTabs-indicator": {
-								borderBottom: "2px solid white", 
+								borderBottom: "2px solid white"
 							},
 						}}
 						className="font-medium text-white text-2xl text-center mt-16"
-						id="Glow">
+						id="Glow"
+					>
 						<Tab
 							label="Structure"
 							{...a11yProps(0)}
@@ -109,9 +102,6 @@ export default function FullWidthTabs() {
 								padding: "0.5rem",
 								marginRight: "0.7rem",
 							}}
-						
-							className="font-medium text-white text-2xl text-center mt-16 "
-							id="Glow"
 						/>
 
 						<Tab
@@ -126,27 +116,27 @@ export default function FullWidthTabs() {
 								padding: "0.5rem",
 								marginLeft: "0.7rem",
 							}}
-							// className untuk menentukan gaya tab.
-							className="font-medium text-white text-2xl text-center mt-16 "
-							id="Glow"
 						/>
 					</Tabs>
 				</AppBar>
-				<SwipeableViews
-					axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-					index={value}
-					onChangeIndex={handleChangeIndex}>
-					<TabPanel value={value} index={0} dir={theme.direction}>
-						<div>
+
+				{/* Slider Swiper */}
+				<Swiper
+					onSlideChange={(swiper) => setValue(swiper.activeIndex)}
+					onSwiper={(swiper) => (swiper.slideTo(value))}
+				>
+					<SwiperSlide>
+						<TabPanel value={value} index={0}>
 							<StrukturKelas />
-						</div>
-					</TabPanel>
-					<TabPanel value={value} index={1} dir={theme.direction}>
-						<div>
+						</TabPanel>
+					</SwiperSlide>
+
+					<SwiperSlide>
+						<TabPanel value={value} index={1}>
 							<Schedule />
-						</div>
-					</TabPanel>
-				</SwipeableViews>
+						</TabPanel>
+					</SwiperSlide>
+				</Swiper>
 			</Box>
 		</div>
 	)
